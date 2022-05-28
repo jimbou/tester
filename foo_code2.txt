@@ -1,0 +1,34 @@
+new basic block
+Basic Block name: hello
+
+hello:
+  %0 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i64 0, i64 0))
+  ret void
+new basic block
+Basic Block name: main
+
+main:
+  %0 = alloca i32, align 4
+  %1 = alloca i32, align 4
+  store i32 0, i32* %0, align 4
+  %2 = call i32 (i8*, ...) @__isoc99_scanf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.1, i64 0, i64 0), i32* %1)
+  %3 = load i32, i32* %1, align 4
+  %4 = icmp sgt i32 %3, 2
+  br i1 %4, label %5, label %6
+new basic block
+Basic Block name: main1
+
+main1:                                            ; preds = %main
+  call void @hello()
+  br label %7
+new basic block
+Basic Block name: main2
+
+main2:                                            ; preds = %main
+  %5 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @.str.2, i64 0, i64 0))
+  br label %6
+new basic block
+Basic Block name: main3
+
+main3:                                            ; preds = %main2, %main1
+  ret i32 0

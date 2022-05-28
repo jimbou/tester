@@ -1,0 +1,36 @@
+Function body:
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @hello() #0 {
+  %1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i64 0, i64 0))
+  ret void
+}
+Basic block:
+
+  %1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i64 0, i64 0))
+  ret void
+Instruction: 
+  %1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i64 0, i64 0))
+Instruction: 
+  ret void
+Function body:
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main() #0 {
+  %1 = alloca i32, align 4
+  store i32 0, i32* %1, align 4
+  call void @hello()
+  ret i32 0
+}
+Basic block:
+
+  %1 = alloca i32, align 4
+  store i32 0, i32* %1, align 4
+  call void @hello()
+  ret i32 0
+Instruction: 
+  %1 = alloca i32, align 4
+Instruction: 
+  store i32 0, i32* %1, align 4
+Instruction: 
+  call void @hello()
+Instruction: 
+  ret i32 0

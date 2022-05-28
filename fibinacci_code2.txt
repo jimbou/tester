@@ -1,0 +1,66 @@
+new basic block
+Basic Block name: hello
+
+hello:
+  %0 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([13 x i8], [13 x i8]* @.str.1, i64 0, i64 0))
+  ret void
+new basic block
+Basic Block name: main
+
+main:
+  %0 = alloca i32, align 4
+  %1 = alloca i32, align 4
+  %2 = alloca i32, align 4
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  %5 = alloca i32, align 4
+  store i32 0, i32* %0, align 4
+  store i32 0, i32* %3, align 4
+  store i32 1, i32* %4, align 4
+  %6 = load i32, i32* %3, align 4
+  %7 = load i32, i32* %4, align 4
+  %8 = add nsw i32 %6, %7
+  store i32 %8, i32* %5, align 4
+  %9 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([28 x i8], [28 x i8]* @.str.2, i64 0, i64 0))
+  %10 = call i32 (i8*, ...) @__isoc99_scanf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.3, i64 0, i64 0), i32* %2)
+  %11 = load i32, i32* %3, align 4
+  %12 = load i32, i32* %4, align 4
+  %13 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([27 x i8], [27 x i8]* @.str.4, i64 0, i64 0), i32 %11, i32 %12)
+  store i32 3, i32* %1, align 4
+  br label %14
+new basic block
+Basic Block name: main1
+
+main1:                                            ; preds = %25, %main
+  %14 = load i32, i32* %1, align 4
+  %15 = load i32, i32* %2, align 4
+  %16 = icmp sle i32 %14, %15
+  br i1 %16, label %17, label %28
+new basic block
+Basic Block name: main2
+
+main2:                                            ; preds = %main1
+  %17 = load i32, i32* %5, align 4
+  %18 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([5 x i8], [5 x i8]* @.str.5, i64 0, i64 0), i32 %17)
+  %19 = load i32, i32* %4, align 4
+  store i32 %19, i32* %3, align 4
+  %20 = load i32, i32* %5, align 4
+  store i32 %20, i32* %4, align 4
+  %21 = load i32, i32* %3, align 4
+  %22 = load i32, i32* %4, align 4
+  %23 = add nsw i32 %21, %22
+  store i32 %23, i32* %5, align 4
+  br label %24
+new basic block
+Basic Block name: main3
+
+main3:                                            ; preds = %main2
+  %24 = load i32, i32* %1, align 4
+  %25 = add nsw i32 %24, 1
+  store i32 %25, i32* %1, align 4
+  br label %main1
+new basic block
+Basic Block name: main4
+
+main4:                                            ; preds = %main1
+  ret i32 0
