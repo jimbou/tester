@@ -44,10 +44,10 @@ struct SkeletonPass : public ModulePass{
             }
            
             
-
+           
             for(Function::iterator BB = F->begin(), E = F->end(); BB != E; ++BB)
             {
-               
+
                     BasicBlock::iterator BI = BB->begin();     // BI will hold the begging point  of the basic block so that we can insert instructions there
                     BasicBlock::iterator BF = BB->end();
                     BF--;                                      // BF will hold the ending point  of the basic block so that we can insert instructions there
@@ -56,7 +56,8 @@ struct SkeletonPass : public ModulePass{
                     errs() << "new basic block\n";
                     BB->setName(F->getName());                // set the name of the bb to its function name plus a unique number which will be added automatically . for more check read.ME
                    
-                    errs() << "Basic Block name: " << BB->getName() << "\n";  // print the name of the current BB
+                    errs() << "Basic Block name: " << BB->getName() << "\n";
+                    errs()<< "Of function : " << F->getName() << "\n";  // print the name of the current BB
                     errs() << *BB;                                            // print the contents of the bb in the form of llvm IR assembly instructions
                     
                     Instruction *inst = &*BI;

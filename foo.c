@@ -64,5 +64,5 @@ int main() {
 
 
 void print(char *s) {
-    printf("%s\n", s);
+    printf("Basic Block : %s\n", s);
 }
