@@ -20,4 +20,4 @@ chmod +x $1
 objdump -d $1 > code_assembly_$1.txt
 ./$1 > run_results_$1.txt
 
-python3 read_result.py run_results_foo.txt
+python3 read_result.py run_results_$1.txt code_ll_$1.txt code_assembly_$1.txt cleaned_code_$1.txt >final_dict_$1.txt

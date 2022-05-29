@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sys
+import re
 names = []
 
 
@@ -28,6 +29,9 @@ for key, value in names_dict.items():
 
 names_ll =[]
 funcs_ll = set()
+fake_funcs = set()
+bb_code =dict()
+counter =0
 
 
 with open(str(sys.argv[2])) as file:
@@ -46,4 +50,65 @@ print(funcs_ll)
 
 print(names_ll)
 
+for bb_name in names_ll:
+    bb_code[bb_name] = []
+
+
+
+
+in_func = False
+tmp_str =""
+inside_bb = False
+f = open(str(sys.argv[4]), "w")
+
+
+with open(str(sys.argv[3])) as file:
+    for line in file:
+        x =line.rstrip()
+        if (x.endswith(">:")):
+            m = re.search('<(.+?)>:', x).group(0)[1:-2]
+            in_func = True
+            inside_bb = False
+            counter = 0
+            if m in funcs_ll:
+                f.write("New real function : ")
+                f.write(m)
+                f.write("\n")
+
+            else :
+                fake_funcs.add(m)
+                f.write("New fake function : ")
+                f.write(m)
+                f.write("\n")
+            
+        elif (in_func == True) and (not x) :
+            in_func = False
+            f.write("\n")
+        elif (in_func == True)  and x : 
+            
+            if x[32:].endswith("<print>"):
+                inside_bb =True
+                counter +=1
+                if counter == 1:
+                    tmp_str = m
+                elif counter >1:
+                    tmp_str = m+str(counter-1)
+
+                f.write("Basic Block : ")
+                f.write(tmp_str)
+                f.write("\n")
+
+            elif x[32:]:
+                if inside_bb and (tmp_str in bb_code):
+                    bb_code[tmp_str].append(x[32:])
+                f.write(x[32:])
+                f.write("\n")
+
+
+for key, value in bb_code.items():
+    print("\n")
+    print("Basic Block : ", key ,"\n")
+    for item in value :
+        print(item)  
+f.close()
 
