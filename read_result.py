@@ -2,6 +2,7 @@
 
 import sys
 import re
+import json
 names = []
 
 
@@ -104,6 +105,11 @@ with open(str(sys.argv[3])) as file:
                 f.write(x[32:])
                 f.write("\n")
 
+
+
+
+with open(str(sys.argv[5]), 'w') as f:
+    json.dump(bb_code, f)
 
 for key, value in bb_code.items():
     print("\n")

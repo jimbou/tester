@@ -1,222 +1,62 @@
-New fake function : _init
-endbr64
-sub    $0x8,%rsp
-mov    0x2fd9(%rip),%rax        # 3fe8 <__gmon_start__>
-test   %rax,%rax
-je     1016 <_init+0x16>
-callq  *%rax
-add    $0x8,%rsp
-retq
+['movabs', '$0x2004', '%rdi'] 
 
-New fake function : .plt
-pushq  0x2f92(%rip)        # 3fb8 <_GLOBAL_OFFSET_TABLE_+0x8>
-jmpq   *0x2f94(%rip)        # 3fc0 <_GLOBAL_OFFSET_TABLE_+0x10>
-nopl   0x0(%rax)
+['mov', '$0x0', '%al'] 
 
-New fake function : printf@plt
-jmpq   *0x2f92(%rip)        # 3fc8 <printf@GLIBC_2.2.5>
-pushq  $0x0
-jmpq   1020 <.plt>
+['callq', '1030', '<printf@plt>'] 
 
-New fake function : __isoc99_scanf@plt
-jmpq   *0x2f8a(%rip)        # 3fd0 <__isoc99_scanf@GLIBC_2.7>
-pushq  $0x1
-jmpq   1020 <.plt>
+['pop', '%rbp'] 
 
-New fake function : __cxa_finalize@plt
-jmpq   *0x2fa2(%rip)        # 3ff8 <__cxa_finalize@GLIBC_2.2.5>
-xchg   %ax,%ax
+['retq'] 
 
-New fake function : _start
-endbr64
-xor    %ebp,%ebp
-mov    %rdx,%r9
-pop    %rsi
-mov    %rsp,%rdx
-and    $0xfffffffffffffff0,%rsp
-push   %rax
-push   %rsp
-lea    0x246(%rip),%r8        # 12c0 <__libc_csu_fini>
-lea    0x1cf(%rip),%rcx        # 1250 <__libc_csu_init>
-lea    0xf8(%rip),%rdi        # 1180 <main>
-callq  *0x2f52(%rip)        # 3fe0 <__libc_start_main@GLIBC_2.2.5>
-hlt
-nop
+['nop'] 
 
-New fake function : deregister_tm_clones
-lea    0x2f79(%rip),%rdi        # 4010 <__TMC_END__>
-lea    0x2f72(%rip),%rax        # 4010 <__TMC_END__>
-cmp    %rdi,%rax
-je     10b8 <deregister_tm_clones+0x28>
-mov    0x2f2e(%rip),%rax        # 3fd8 <_ITM_deregisterTMCloneTable>
-test   %rax,%rax
-je     10b8 <deregister_tm_clones+0x28>
-jmpq   *%rax
-nopl   0x0(%rax)
-retq
-nopl   0x0(%rax)
+['nop'] 
 
-New fake function : register_tm_clones
-lea    0x2f49(%rip),%rdi        # 4010 <__TMC_END__>
-lea    0x2f42(%rip),%rsi        # 4010 <__TMC_END__>
-sub    %rdi,%rsi
-mov    %rsi,%rax
-shr    $0x3f,%rsi
-sar    $0x3,%rax
-add    %rax,%rsi
-sar    %rsi
-je     10f8 <register_tm_clones+0x38>
-mov    0x2f05(%rip),%rax        # 3ff0 <_ITM_registerTMCloneTable>
-test   %rax,%rax
-je     10f8 <register_tm_clones+0x38>
-jmpq   *%rax
-nopw   0x0(%rax,%rax,1)
-retq
-nopl   0x0(%rax)
+['nop'] 
 
-New fake function : __do_global_dtors_aux
-endbr64
-cmpb   $0x0,0x2f05(%rip)        # 4010 <__TMC_END__>
-jne    1138 <__do_global_dtors_aux+0x38>
-push   %rbp
-cmpq   $0x0,0x2ee2(%rip)        # 3ff8 <__cxa_finalize@GLIBC_2.2.5>
-mov    %rsp,%rbp
-je     1127 <__do_global_dtors_aux+0x27>
-mov    0x2ee6(%rip),%rdi        # 4008 <__dso_handle>
-callq  1050 <__cxa_finalize@plt>
-callq  1090 <deregister_tm_clones>
-movb   $0x1,0x2edd(%rip)        # 4010 <__TMC_END__>
-pop    %rbp
-retq
-nopl   (%rax)
-retq
-nopl   0x0(%rax)
+['nop'] 
 
-New fake function : frame_dummy
-endbr64
-jmpq   10c0 <register_tm_clones>
-nopl   0x0(%rax)
+['nop'] 
 
-New real function : hello
-push   %rbp
-mov    %rsp,%rbp
-movabs $0x2035,%rdi
-Basic Block : hello
-movabs $0x2004,%rdi
-mov    $0x0,%al
-callq  1030 <printf@plt>
-pop    %rbp
-retq
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
+['nop'] 
 
-New real function : main
-push   %rbp
-mov    %rsp,%rbp
-sub    $0x10,%rsp
-movabs $0x203b,%rdi
-Basic Block : main
-movl   $0x0,-0x8(%rbp)
-movabs $0x2011,%rdi
-lea    -0x4(%rbp),%rsi
-mov    $0x0,%al
-callq  1040 <__isoc99_scanf@plt>
-cmpl   $0x2,-0x4(%rbp)
-jle    11cf <main+0x4f>
-movabs $0x2040,%rdi
-Basic Block : main1
-callq  1150 <hello>
-jmp    11ef <main+0x6f>
-movabs $0x2046,%rdi
-Basic Block : main2
-movabs $0x2014,%rdi
-mov    $0x0,%al
-callq  1030 <printf@plt>
-movabs $0x204c,%rdi
-Basic Block : main3
-movabs $0x2052,%rdi
-Basic Block : main4
-xor    %eax,%eax
-add    $0x10,%rsp
-pop    %rbp
-retq
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
-nop
+['nop'] 
 
-New fake function : print
-push   %rbp
-mov    %rsp,%rbp
-sub    $0x10,%rsp
-mov    %rdi,-0x8(%rbp)
-mov    -0x8(%rbp),%rsi
-movabs $0x2023,%rdi
-mov    $0x0,%al
-callq  1030 <printf@plt>
-add    $0x10,%rsp
-pop    %rbp
-retq
-nopw   0x0(%rax,%rax,1)
+['nop'] 
 
-New fake function : __libc_csu_init
-endbr64
-push   %r15
-lea    0x2b43(%rip),%r15        # 3da0 <__frame_dummy_init_array_entry>
-push   %r14
-mov    %rdx,%r14
-push   %r13
-mov    %rsi,%r13
-push   %r12
-mov    %edi,%r12d
-push   %rbp
-lea    0x2b34(%rip),%rbp        # 3da8 <__do_global_dtors_aux_fini_array_entry>
-push   %rbx
-sub    %r15,%rbp
-sub    $0x8,%rsp
-callq  1000 <_init>
-sar    $0x3,%rbp
-je     12a6 <__libc_csu_init+0x56>
-xor    %ebx,%ebx
-nopl   0x0(%rax)
-mov    %r14,%rdx
-mov    %r13,%rsi
-mov    %r12d,%edi
-callq  *(%r15,%rbx,8)
-add    $0x1,%rbx
-cmp    %rbx,%rbp
-jne    1290 <__libc_csu_init+0x40>
-add    $0x8,%rsp
-pop    %rbx
-pop    %rbp
-pop    %r12
-pop    %r13
-pop    %r14
-pop    %r15
-retq
-data16 nopw %cs:0x0(%rax,%rax,1)
+['nop'] 
 
-New fake function : __libc_csu_fini
-endbr64
-retq
+['nop'] 
 
-New fake function : _fini
-endbr64
-sub    $0x8,%rsp
-add    $0x8,%rsp
-retq
+['movl', '$0x0', '-0x8(%rbp)'] 
+
+['movabs', '$0x2011', '%rdi'] 
+
+['lea', '-0x4(%rbp)', '%rsi'] 
+
+['mov', '$0x0', '%al'] 
+
+['callq', '1040', '<__isoc99_scanf@plt>'] 
+
+['cmpl', '$0x2', '-0x4(%rbp)'] 
+
+['jle', '11cf', '<main+0x4f>'] 
+
+['movabs', '$0x2040', '%rdi'] 
+
+['callq', '1150', '<hello>'] 
+
+['jmp', '11ef', '<main+0x6f>'] 
+
+['movabs', '$0x2046', '%rdi'] 
+
+['movabs', '$0x2014', '%rdi'] 
+
+['mov', '$0x0', '%al'] 
+
+['callq', '1030', '<printf@plt>'] 
+
+['movabs', '$0x204c', '%rdi'] 
+
+['movabs', '$0x2052', '%rdi'] 
+
