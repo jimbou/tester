@@ -239,7 +239,8 @@ Disassembly of section .text:
 00000000000012c0 <__libc_csu_fini>:
     12c0:	f3 0f 1e fa          	endbr64 
     12c4:	c3                   	retq   
-
+<.plt>:
+    1020:	ff 35 92 2f 00 00 
 Disassembly of section .fini:
 
 00000000000012c8 <_fini>:
