@@ -1,62 +1,248 @@
 ['movabs', '$0x2004', '%rdi'] 
 
+movabs   $0x2004   %rdi      
+
+['movabs', '$0x2004', '%rdi'] 
+
+movabs   I   r      
+
 ['mov', '$0x0', '%al'] 
 
+mov   $0x0   %al      
+
+['mov', '$0x0', '%al'] 
+
+mov   I   r      
+
 ['callq', '1030', '<printf@plt>'] 
+
+callq   1030   <printf@plt>      
+
+['callq', '1030', '<printf@plt>'] 
+
+callq            
 
 ['pop', '%rbp'] 
 
+pop   %rbp         
+
+['pop', '%rbp'] 
+
+pop   r         
+
 ['retq'] 
 
-['nop'] 
+retq            
+
+['retq'] 
+
+retq            
 
 ['nop'] 
 
-['nop'] 
+nop            
 
 ['nop'] 
 
-['nop'] 
+nop            
 
 ['nop'] 
 
-['nop'] 
+nop            
 
 ['nop'] 
 
-['nop'] 
+nop            
 
 ['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
+
+['nop'] 
+
+nop            
 
 ['movl', '$0x0', '-0x8(%rbp)'] 
 
+movl   $0x0   -0x8(%rbp)      
+
+['movl', '$0x0', '-0x8(%rbp)'] 
+
+movl   I   m      
+
 ['movabs', '$0x2011', '%rdi'] 
+
+movabs   $0x2011   %rdi      
+
+['movabs', '$0x2011', '%rdi'] 
+
+movabs   I   r      
 
 ['lea', '-0x4(%rbp)', '%rsi'] 
 
+lea   -0x4(%rbp)   %rsi      
+
+['lea', '-0x4(%rbp)', '%rsi'] 
+
+lea   m   r      
+
 ['mov', '$0x0', '%al'] 
+
+mov   $0x0   %al      
+
+['mov', '$0x0', '%al'] 
+
+mov   I   r      
 
 ['callq', '1040', '<__isoc99_scanf@plt>'] 
 
+callq   1040   <__isoc99_scanf@plt>      
+
+['callq', '1040', '<__isoc99_scanf@plt>'] 
+
+callq            
+
 ['cmpl', '$0x2', '-0x4(%rbp)'] 
+
+cmpl   $0x2   -0x4(%rbp)      
+
+['cmpl', '$0x2', '-0x4(%rbp)'] 
+
+cmpl   I   m      
 
 ['jle', '11cf', '<main+0x4f>'] 
 
+jle   11cf   <main+0x4f>      
+
+['jle', '11cf', '<main+0x4f>'] 
+
+jle            
+
 ['movabs', '$0x2040', '%rdi'] 
+
+movabs   $0x2040   %rdi      
+
+['movabs', '$0x2040', '%rdi'] 
+
+movabs   I   r      
 
 ['callq', '1150', '<hello>'] 
 
+callq   1150   <hello>      
+
+['callq', '1150', '<hello>'] 
+
+callq            
+
 ['jmp', '11ef', '<main+0x6f>'] 
+
+jmp   11ef   <main+0x6f>      
+
+['jmp', '11ef', '<main+0x6f>'] 
+
+jmp            
 
 ['movabs', '$0x2046', '%rdi'] 
 
+movabs   $0x2046   %rdi      
+
+['movabs', '$0x2046', '%rdi'] 
+
+movabs   I   r      
+
 ['movabs', '$0x2014', '%rdi'] 
+
+movabs   $0x2014   %rdi      
+
+['movabs', '$0x2014', '%rdi'] 
+
+movabs   I   r      
 
 ['mov', '$0x0', '%al'] 
 
+mov   $0x0   %al      
+
+['mov', '$0x0', '%al'] 
+
+mov   I   r      
+
 ['callq', '1030', '<printf@plt>'] 
+
+callq   1030   <printf@plt>      
+
+['callq', '1030', '<printf@plt>'] 
+
+callq            
 
 ['movabs', '$0x204c', '%rdi'] 
 
+movabs   $0x204c   %rdi      
+
+['movabs', '$0x204c', '%rdi'] 
+
+movabs   I   r      
+
 ['movabs', '$0x2052', '%rdi'] 
+
+movabs   $0x2052   %rdi      
+
+['movabs', '$0x2052', '%rdi'] 
+
+movabs   I   r      
 
