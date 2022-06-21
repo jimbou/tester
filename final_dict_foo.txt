@@ -1,7 +1,6 @@
-main1  :  1
-main3  :  1
 main  :  1
-hello  :  1
+main2  :  1
+main3  :  1
 final  :  1
 the set is 
 
@@ -37,14 +36,14 @@ mov    $0x0,%al
 callq  1040 <__isoc99_scanf@plt>
 cmpl   $0x2,-0x4(%rbp)
 jle    11cf <main+0x4f>
-movabs $0x2040,%rdi
+movabs $0x204c,%rdi
 
 
 Basic Block :  main1 
 
 callq  1150 <hello>
 jmp    11ef <main+0x6f>
-movabs $0x2046,%rdi
+movabs $0x2052,%rdi
 
 
 Basic Block :  main2 
@@ -52,9 +51,9 @@ Basic Block :  main2
 movabs $0x2014,%rdi
 mov    $0x0,%al
 callq  1030 <printf@plt>
-movabs $0x204c,%rdi
+movabs $0x2058,%rdi
 
 
 Basic Block :  main3 
 
-movabs $0x2052,%rdi
+movabs $0x205e,%rdi

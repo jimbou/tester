@@ -1,6 +1,9 @@
 Basic Block : main
-Basic Block : main1
-Basic Block : hello
-hello world
+Energy: 15
+Basic Block : main2
+Energy: 15
+hello world_2
 Basic Block : main3
+Energy: 15
 Basic Block : final  
+Energy: 15

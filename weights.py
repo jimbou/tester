@@ -46,12 +46,14 @@ for key, value in my_dict.items():
             arg3 = ""
 
 
-        print (opcodes,"\n")
-        print (x[0]," ", arg1," ",arg2," ",arg3," ","\n")
+        #print (opcodes,"\n")
+        #print (x[0]," ", arg1," ",arg2," ",arg3," ","\n")
 
         if arg1 in regs:
             arg1 ="r"
         elif ('(' in arg1 ) and (')' in arg1 ):
+            arg1 ="m"
+        elif arg1.startswith('<') and arg1.endswith('>') :
             arg1 ="m"
         elif arg1.startswith('%'):
             arg1 ="m"
@@ -65,6 +67,8 @@ for key, value in my_dict.items():
         if arg2 in regs:
             arg2 ="r"
         elif ('(' in arg2 ) and (')' in arg2 ):
+            arg2 ="m"
+        elif arg2.startswith('<') and arg2.endswith('>') :
             arg2 ="m"
         elif arg2.startswith('%'):
             arg2 ="m"
@@ -81,6 +85,8 @@ for key, value in my_dict.items():
             arg3 ="m"
         elif arg3.startswith('%'):
             arg3 ="m"
+        elif arg2.startswith('<') and arg3.endswith('>') :
+            arg2 ="m"
         elif arg3.startswith("$0x"):
             arg3 ="I"
         elif arg3 == "%cl":
@@ -92,8 +98,50 @@ for key, value in my_dict.items():
         print (x[0]," ", arg1," ",arg2," ",arg3," ","\n")
 
         
+        df_temp = df.loc[df['name'] == x[0]]
+        if df_temp.empty :
+            df_temp = df.loc[df['name'] == x[0][:-1]]
+        if df_temp.empty :
+            df_temp = df.loc[df['name'] == x[0][:-2]]
+        if df_temp.empty :
+            df_temp = df.loc[df['name'] == x[0][:-3]]
+        if df_temp.empty :
+            df_temp = df.loc[df['name'] == x[0][:-4]]
+        if df_temp.empty :
+            print("Could not find opcode  : ", x[0] ,"\n")
+
+        res_weight =3 
+        
+        if not df_temp.loc[(df_temp['op1'] == arg1) & (df_temp['op2'] == arg2) & (df_temp['op3'] == arg3)].empty :
+            res_weight = df_temp.loc[(df_temp['op1'] == arg1) & (df_temp['op2'] == arg2) & (df_temp['op3'] == arg3)].iloc[0]['weight']
+        elif not df_temp.loc[(df_temp['op1'] == arg1) & (df_temp['op2'] == arg2) ].empty :
+            res_weight = df_temp.loc[(df_temp['op1'] == arg1) & (df_temp['op2'] == arg2) ].iloc[0]['weight']
+        elif not df_temp.loc[(df_temp['op1'] == arg1) & (df_temp['op3'] == arg3) ].empty :
+            res_weight = df_temp.loc[(df_temp['op1'] == arg1) & (df_temp['op3'] == arg3) ].iloc[0]['weight']
+        elif not df_temp.loc[(df_temp['op3'] == arg3) & (df_temp['op2'] == arg2) ].empty :
+            res_weight = df_temp.loc[(df_temp['op3'] == arg3) & (df_temp['op2'] == arg2) ].iloc[0]['weight']
+        elif not df_temp.loc[df_temp['op1'] == arg1  ].empty :
+            res_weight = df_temp.loc[df_temp['op1'] == arg1  ].iloc[0]['weight']
+        elif not df_temp.loc[df_temp['op2'] == arg2  ].empty :
+            res_weight = df_temp.loc[df_temp['op2'] == arg2  ].iloc[0]['weight']
+        elif not df_temp.loc[df_temp['op3'] == arg3  ].empty :
+            res_weight = df_temp.loc[df_temp['op3'] == arg3  ].iloc[0]['weight']
+        elif not df_temp.empty :
+            res_weight = df_temp.iloc[0]['weight']
+        else :
+            print (print("Could not find opcode  : ", x[0] ," ", arg1," ",arg2," ",arg3," ", "\n"))
+        
+        print ("the result weight is ", res_weight , "\n")
+        weights[key] += float(res_weight)
+        
 
 
+
+        
+
+
+        print(df_temp)
+        print ("\n")
         #print(opcodes ,"\n")  
 
 

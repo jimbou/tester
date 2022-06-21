@@ -36,8 +36,8 @@ mov    %rsp,%rdx
 and    $0xfffffffffffffff0,%rsp
 push   %rax
 push   %rsp
-lea    0x246(%rip),%r8        # 12c0 <__libc_csu_fini>
-lea    0x1cf(%rip),%rcx        # 1250 <__libc_csu_init>
+lea    0x256(%rip),%r8        # 12d0 <__libc_csu_fini>
+lea    0x1df(%rip),%rcx        # 1260 <__libc_csu_init>
 lea    0xf8(%rip),%rdi        # 1180 <main>
 callq  *0x2f52(%rip)        # 3fe0 <__libc_start_main@GLIBC_2.2.5>
 hlt
@@ -100,7 +100,7 @@ nopl   0x0(%rax)
 New real function : hello
 push   %rbp
 mov    %rsp,%rbp
-movabs $0x2035,%rdi
+movabs $0x2041,%rdi
 Basic Block : hello
 movabs $0x2004,%rdi
 mov    $0x0,%al
@@ -122,7 +122,7 @@ New real function : main
 push   %rbp
 mov    %rsp,%rbp
 sub    $0x10,%rsp
-movabs $0x203b,%rdi
+movabs $0x2047,%rdi
 Basic Block : main
 movl   $0x0,-0x8(%rbp)
 movabs $0x2011,%rdi
@@ -131,18 +131,18 @@ mov    $0x0,%al
 callq  1040 <__isoc99_scanf@plt>
 cmpl   $0x2,-0x4(%rbp)
 jle    11cf <main+0x4f>
-movabs $0x2040,%rdi
+movabs $0x204c,%rdi
 Basic Block : main1
 callq  1150 <hello>
 jmp    11ef <main+0x6f>
-movabs $0x2046,%rdi
+movabs $0x2052,%rdi
 Basic Block : main2
 movabs $0x2014,%rdi
 mov    $0x0,%al
 callq  1030 <printf@plt>
-movabs $0x204c,%rdi
+movabs $0x2058,%rdi
 Basic Block : main3
-movabs $0x2052,%rdi
+movabs $0x205e,%rdi
 Basic Block : main4
 xor    %eax,%eax
 add    $0x10,%rsp
@@ -169,15 +169,18 @@ mov    -0x8(%rbp),%rsi
 movabs $0x2023,%rdi
 mov    $0x0,%al
 callq  1030 <printf@plt>
+movabs $0x2035,%rdi
+mov    $0x0,%al
+callq  1030 <printf@plt>
 add    $0x10,%rsp
 pop    %rbp
 retq
-nopw   0x0(%rax,%rax,1)
+nopl   0x0(%rax,%rax,1)
 
 New fake function : __libc_csu_init
 endbr64
 push   %r15
-lea    0x2b43(%rip),%r15        # 3da0 <__frame_dummy_init_array_entry>
+lea    0x2b33(%rip),%r15        # 3da0 <__frame_dummy_init_array_entry>
 push   %r14
 mov    %rdx,%r14
 push   %r13
@@ -185,13 +188,13 @@ mov    %rsi,%r13
 push   %r12
 mov    %edi,%r12d
 push   %rbp
-lea    0x2b34(%rip),%rbp        # 3da8 <__do_global_dtors_aux_fini_array_entry>
+lea    0x2b24(%rip),%rbp        # 3da8 <__do_global_dtors_aux_fini_array_entry>
 push   %rbx
 sub    %r15,%rbp
 sub    $0x8,%rsp
 callq  1000 <_init>
 sar    $0x3,%rbp
-je     12a6 <__libc_csu_init+0x56>
+je     12b6 <__libc_csu_init+0x56>
 xor    %ebx,%ebx
 nopl   0x0(%rax)
 mov    %r14,%rdx
@@ -200,7 +203,7 @@ mov    %r12d,%edi
 callq  *(%r15,%rbx,8)
 add    $0x1,%rbx
 cmp    %rbx,%rbp
-jne    1290 <__libc_csu_init+0x40>
+jne    12a0 <__libc_csu_init+0x40>
 add    $0x8,%rsp
 pop    %rbx
 pop    %rbp

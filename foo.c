@@ -65,4 +65,7 @@ int main() {
 
 void print(char *s) {
     printf("Basic Block : %s\n", s);
+    printf("Energy: 15\n");
+    return;
+
 }

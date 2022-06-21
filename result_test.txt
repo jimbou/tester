@@ -1,248 +1,361 @@
 ['movabs', '$0x2004', '%rdi'] 
 
-movabs   $0x2004   %rdi      
-
-['movabs', '$0x2004', '%rdi'] 
-
 movabs   I   r      
 
-['mov', '$0x0', '%al'] 
+the result weight is  0.25 
 
-mov   $0x0   %al      
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
 
 ['mov', '$0x0', '%al'] 
 
 mov   I   r      
 
+the result weight is  0.25 
+
+  name op1  op2  op3 weight
+0  mov   r    I  NaN   0.25
+1  mov   r    r  NaN   0.25
+2  mov   r    m  NaN    0.5
+3  mov   m  NaN  NaN      1
+
+
 ['callq', '1030', '<printf@plt>'] 
 
-callq   1030   <printf@plt>      
+callq      m      
 
-['callq', '1030', '<printf@plt>'] 
+the result weight is  2 
 
-callq            
+      name  op1  op2  op3 weight
+186  callq  NaN  NaN  NaN      2
+187  callq    m  NaN  NaN      3
 
-['pop', '%rbp'] 
-
-pop   %rbp         
 
 ['pop', '%rbp'] 
 
 pop   r         
 
+the result weight is  0.5 
+
+   name op1  op2  op3 weight
+20  pop   r  NaN  NaN    0.5
+21  pop  sp  NaN  NaN      4
+22  pop   m  NaN  NaN      1
+
+
 ['retq'] 
 
 retq            
 
-['retq'] 
+the result weight is  1 
 
-retq            
+     name  op1  op2  op3 weight
+188  retq  NaN  NaN  NaN      1
+189  retq    I  NaN  NaN      2
 
-['nop'] 
-
-nop            
-
-['nop'] 
-
-nop            
 
 ['nop'] 
 
 nop            
 
-['nop'] 
+the result weight is  0.25 
 
-nop            
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
 
-['nop'] 
-
-nop            
 
 ['nop'] 
 
 nop            
 
-['nop'] 
+the result weight is  0.25 
 
-nop            
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
 
-['nop'] 
-
-nop            
 
 ['nop'] 
 
 nop            
 
-['nop'] 
+the result weight is  0.25 
 
-nop            
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
 
-['nop'] 
-
-nop            
 
 ['nop'] 
 
 nop            
 
-['nop'] 
+the result weight is  0.25 
 
-nop            
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
 
-['nop'] 
-
-nop            
 
 ['nop'] 
 
 nop            
 
-['nop'] 
+the result weight is  0.25 
 
-nop            
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
 
-['nop'] 
-
-nop            
 
 ['nop'] 
 
 nop            
 
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
 ['nop'] 
 
 nop            
 
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
 ['nop'] 
 
 nop            
 
-['movl', '$0x0', '-0x8(%rbp)'] 
+the result weight is  0.25 
 
-movl   $0x0   -0x8(%rbp)      
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
 
 ['movl', '$0x0', '-0x8(%rbp)'] 
 
 movl   I   m      
 
-['movabs', '$0x2011', '%rdi'] 
+the result weight is  0.5 
 
-movabs   $0x2011   %rdi      
+  name op1  op2  op3 weight
+0  mov   r    I  NaN   0.25
+1  mov   r    r  NaN   0.25
+2  mov   r    m  NaN    0.5
+3  mov   m  NaN  NaN      1
+
 
 ['movabs', '$0x2011', '%rdi'] 
 
 movabs   I   r      
 
-['lea', '-0x4(%rbp)', '%rsi'] 
+the result weight is  0.25 
 
-lea   -0x4(%rbp)   %rsi      
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
 
 ['lea', '-0x4(%rbp)', '%rsi'] 
 
 lea   m   r      
 
-['mov', '$0x0', '%al'] 
+the result weight is  1 
 
-mov   $0x0   %al      
+   name  op1  op2  op3 weight
+27  lea  NaN  NaN  NaN      1
+
 
 ['mov', '$0x0', '%al'] 
 
 mov   I   r      
 
+the result weight is  0.25 
+
+  name op1  op2  op3 weight
+0  mov   r    I  NaN   0.25
+1  mov   r    r  NaN   0.25
+2  mov   r    m  NaN    0.5
+3  mov   m  NaN  NaN      1
+
+
 ['callq', '1040', '<__isoc99_scanf@plt>'] 
 
-callq   1040   <__isoc99_scanf@plt>      
+callq      m      
 
-['callq', '1040', '<__isoc99_scanf@plt>'] 
+the result weight is  2 
 
-callq            
+      name  op1  op2  op3 weight
+186  callq  NaN  NaN  NaN      2
+187  callq    m  NaN  NaN      3
 
-['cmpl', '$0x2', '-0x4(%rbp)'] 
-
-cmpl   $0x2   -0x4(%rbp)      
 
 ['cmpl', '$0x2', '-0x4(%rbp)'] 
 
 cmpl   I   m      
 
+the result weight is  0.25 
+
+   name op1  op2  op3 weight
+51  cmp   r  NaN  NaN   0.25
+52  cmp   m  NaN  NaN    0.5
+
+
 ['jle', '11cf', '<main+0x4f>'] 
 
-jle   11cf   <main+0x4f>      
+jle      m      
 
-['jle', '11cf', '<main+0x4f>'] 
+the result weight is  1 
 
-jle            
+    name  op1  op2  op3 weight
+159  jle  NaN  NaN  NaN      1
+
 
 ['movabs', '$0x2040', '%rdi'] 
 
-movabs   $0x2040   %rdi      
-
-['movabs', '$0x2040', '%rdi'] 
-
 movabs   I   r      
+
+the result weight is  0.25 
+
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
 
 ['callq', '1150', '<hello>'] 
 
-callq   1150   <hello>      
+callq      m      
 
-['callq', '1150', '<hello>'] 
+the result weight is  2 
 
-callq            
+      name  op1  op2  op3 weight
+186  callq  NaN  NaN  NaN      2
+187  callq    m  NaN  NaN      3
+
 
 ['jmp', '11ef', '<main+0x6f>'] 
 
-jmp   11ef   <main+0x6f>      
+jmp      m      
 
-['jmp', '11ef', '<main+0x6f>'] 
+the result weight is  2 
 
-jmp            
+    name  op1  op2  op3 weight
+148  jmp  NaN  NaN  NaN      2
 
-['movabs', '$0x2046', '%rdi'] 
-
-movabs   $0x2046   %rdi      
 
 ['movabs', '$0x2046', '%rdi'] 
 
 movabs   I   r      
 
-['movabs', '$0x2014', '%rdi'] 
+the result weight is  0.25 
 
-movabs   $0x2014   %rdi      
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
 
 ['movabs', '$0x2014', '%rdi'] 
 
 movabs   I   r      
 
-['mov', '$0x0', '%al'] 
+the result weight is  0.25 
 
-mov   $0x0   %al      
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
 
 ['mov', '$0x0', '%al'] 
 
 mov   I   r      
 
+the result weight is  0.25 
+
+  name op1  op2  op3 weight
+0  mov   r    I  NaN   0.25
+1  mov   r    r  NaN   0.25
+2  mov   r    m  NaN    0.5
+3  mov   m  NaN  NaN      1
+
+
 ['callq', '1030', '<printf@plt>'] 
 
-callq   1030   <printf@plt>      
+callq      m      
 
-['callq', '1030', '<printf@plt>'] 
+the result weight is  2 
 
-callq            
+      name  op1  op2  op3 weight
+186  callq  NaN  NaN  NaN      2
+187  callq    m  NaN  NaN      3
 
-['movabs', '$0x204c', '%rdi'] 
-
-movabs   $0x204c   %rdi      
 
 ['movabs', '$0x204c', '%rdi'] 
 
 movabs   I   r      
 
-['movabs', '$0x2052', '%rdi'] 
+the result weight is  0.25 
 
-movabs   $0x2052   %rdi      
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
 
 ['movabs', '$0x2052', '%rdi'] 
 
 movabs   I   r      
 
+the result weight is  0.25 
+
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
+
+hello
+6.5
+main
+5.5
+main1
+4.25
+main2
+2.75
+main3
+0.25
