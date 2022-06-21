@@ -9,7 +9,9 @@
 
 
 int main(){
-    printf("Energy: 15\n");
+    int a;
+    scanf("%d", &a);
+    printf("Energy: %d\n" ,a );
     return 0;
 
 }

@@ -28,13 +28,13 @@ llvm-as $1.ll
  echo "Creation of unmodified bc successfull"
 
 llc -filetype=obj  $1.bc 
-gcc  -o $1_unmodified $1.o  -O0  
-chmod +x $1_unmodified
+gcc  -o $1_unchanged $1.o  -O0  
+chmod +x $1_unchanged
 #here we have created an unmodified executable
  echo "Creation of unmodified executable successfull"
 
 ./rapl_read >$1_unchanged_energy.txt  #read energy value then run unmodified code then read energy again
-./$1_unchanged
+./$1_unchanged > dontcare.txt
 ./rapl_read >>$1_unchanged_energy.txt
 #we run the unmodified executable
 
@@ -52,6 +52,6 @@ objdump -d $1 > code_assembly_$1.txt
 
 
 
-python3 read_result.py run_results_$1.txt code_ll_$1.txt code_assembly_$1.txt cleaned_code_$1.txt $1_dict.json >final_dict_$1.txt
+#python3 read_result.py run_results_$1.txt code_ll_$1.txt code_assembly_$1.txt cleaned_code_$1.txt $1_dict.json $1_unchanged_energy.txt $1_energy_dict.json >final_dict_$1.txt
  echo "Run of python script successfull"
   echo "Results in final_dict_$1.txt"

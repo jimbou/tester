@@ -5,5 +5,79 @@ Energy: 15
 hello world_2
 Basic Block : main3
 Energy: 15
-Basic Block : final  
+Basic Block : main  
 Energy: 15
+Basic Block : main
+Energy: 112
+Basic Block : main2
+Energy: 112
+hello world_2
+Basic Block : main3
+Energy: 112
+Basic Block : main2  
+Energy: 244
+Basic Block : main3
+Energy: 244
+Basic Block : hello  
+Energy: 244
+Basic Block : main
+Energy: 244
+Basic Block : main2
+Energy: 412
+hello world_2
+Basic Block : main3
+Energy: 412
+Basic Block : hello  
+Energy: 412
+Basic Block : main3
+Energy: 412
+Basic Block : hello  
+Energy: 412
+Basic Block : main
+Energy: 412
+Basic Block : main2
+Energy: 412
+hello world_2
+Basic Block : main3
+Energy: 701
+hello world_2
+Basic Block : main3
+Energy: 701
+Basic Block : hello  
+Energy: 701
+Basic Block : main3
+Energy: 701
+Basic Block : main2  
+Energy: 701
+Basic Block : main
+Energy: 822
+Basic Block : main2
+Energy: 822
+hello world_2
+Basic Block : main3
+Energy: 822
+Basic Block : main2
+Energy: 966
+hello world_2
+Basic Block : main3
+Energy: 966
+hello world_2
+Basic Block : main3
+Energy: 966
+Basic Block : main3  
+Energy: 966
+Basic Block : main3
+Energy: 1092
+Basic Block : hello  
+Energy: 1092
+Basic Block : main3
+Energy: 1092
+Basic Block : main2  
+Energy: 1092
+Basic Block : main3
+Energy: 1092
+Basic Block : main  
+Energy: 1234
+Basic Block : final  
+Energy: 1234
+

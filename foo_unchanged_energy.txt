@@ -1,2 +1,2 @@
-Energy: 15
-Energy: 15
+Energy: 12
+Energy: 1012

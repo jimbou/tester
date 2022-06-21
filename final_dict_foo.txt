@@ -1,10 +1,66 @@
-main  :  1
-main2  :  1
-main3  :  1
-final  :  1
+Added  [] in list 
+
+Added  [] in list 
+
+Added  [] in list 
+
+Added  [] in list 
+
+Added  [] in list 
+
+Added  [] in list 
+
+Added  [] in list 
+
+Added  [] in list 
+
+['main', 'main2', 'main3', 'main'] 
+
+4 
+
+['main', 'main2', 'main3'] 
+
+7 
+
+['main2', 'main3', 'hello', 'main'] 
+
+11 
+
+['main2', 'main3', 'hello', 'main3', 'hello', 'main', 'main2'] 
+
+18 
+
+['main3', 'main3', 'hello', 'main3', 'main2'] 
+
+23 
+
+['main', 'main2', 'main3'] 
+
+26 
+
+['main2', 'main3', 'main3', 'main3'] 
+
+30 
+
+['main3', 'hello', 'main3', 'main2', 'main3'] 
+
+35 
+
+Total  energy cost is :  1219.0 
+
+Total clean energy cost is :  219.0 
+
+Total  reads are :  35 
+
+Average Rapl Read energy cost is :  6.257142857142857 
+
+hello  :  5
+main2  :  9
+main3  :  15
+main  :  7
 the set is 
 
-{'main', 'hello'}
+{'hello', 'main'}
 ['hello', 'main', 'main1', 'main2', 'main3']
 
 
@@ -57,3 +113,365 @@ movabs $0x2058,%rdi
 Basic Block :  main3 
 
 movabs $0x205e,%rdi
+['movabs', '$0x2004', '%rdi'] 
+
+movabs   I   r      
+
+the result weight is  0.25 
+
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
+
+['mov', '$0x0', '%al'] 
+
+mov   I   r      
+
+the result weight is  0.25 
+
+  name op1  op2  op3 weight
+0  mov   r    I  NaN   0.25
+1  mov   r    r  NaN   0.25
+2  mov   r    m  NaN    0.5
+3  mov   m  NaN  NaN      1
+
+
+['callq', '1030', '<printf@plt>'] 
+
+callq      m      
+
+the result weight is  2 
+
+      name  op1  op2  op3 weight
+186  callq  NaN  NaN  NaN      2
+187  callq    m  NaN  NaN      3
+
+
+['pop', '%rbp'] 
+
+pop   r         
+
+the result weight is  0.5 
+
+   name op1  op2  op3 weight
+20  pop   r  NaN  NaN    0.5
+21  pop  sp  NaN  NaN      4
+22  pop   m  NaN  NaN      1
+
+
+['retq'] 
+
+retq            
+
+the result weight is  1 
+
+     name  op1  op2  op3 weight
+188  retq  NaN  NaN  NaN      1
+189  retq    I  NaN  NaN      2
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['nop'] 
+
+nop            
+
+the result weight is  0.25 
+
+    name  op1  op2  op3 weight
+216  nop  NaN  NaN  NaN   0.25
+
+
+['movl', '$0x0', '-0x8(%rbp)'] 
+
+movl   I   m      
+
+the result weight is  0.5 
+
+  name op1  op2  op3 weight
+0  mov   r    I  NaN   0.25
+1  mov   r    r  NaN   0.25
+2  mov   r    m  NaN    0.5
+3  mov   m  NaN  NaN      1
+
+
+['movabs', '$0x2011', '%rdi'] 
+
+movabs   I   r      
+
+the result weight is  0.25 
+
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
+
+['lea', '-0x4(%rbp)', '%rsi'] 
+
+lea   m   r      
+
+the result weight is  1 
+
+   name  op1  op2  op3 weight
+27  lea  NaN  NaN  NaN      1
+
+
+['mov', '$0x0', '%al'] 
+
+mov   I   r      
+
+the result weight is  0.25 
+
+  name op1  op2  op3 weight
+0  mov   r    I  NaN   0.25
+1  mov   r    r  NaN   0.25
+2  mov   r    m  NaN    0.5
+3  mov   m  NaN  NaN      1
+
+
+['callq', '1040', '<__isoc99_scanf@plt>'] 
+
+callq      m      
+
+the result weight is  2 
+
+      name  op1  op2  op3 weight
+186  callq  NaN  NaN  NaN      2
+187  callq    m  NaN  NaN      3
+
+
+['cmpl', '$0x2', '-0x4(%rbp)'] 
+
+cmpl   I   m      
+
+the result weight is  0.25 
+
+   name op1  op2  op3 weight
+51  cmp   r  NaN  NaN   0.25
+52  cmp   m  NaN  NaN    0.5
+
+
+['jle', '11cf', '<main+0x4f>'] 
+
+jle      m      
+
+the result weight is  1 
+
+    name  op1  op2  op3 weight
+159  jle  NaN  NaN  NaN      1
+
+
+['movabs', '$0x204c', '%rdi'] 
+
+movabs   I   r      
+
+the result weight is  0.25 
+
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
+
+['callq', '1150', '<hello>'] 
+
+callq      m      
+
+the result weight is  2 
+
+      name  op1  op2  op3 weight
+186  callq  NaN  NaN  NaN      2
+187  callq    m  NaN  NaN      3
+
+
+['jmp', '11ef', '<main+0x6f>'] 
+
+jmp      m      
+
+the result weight is  2 
+
+    name  op1  op2  op3 weight
+148  jmp  NaN  NaN  NaN      2
+
+
+['movabs', '$0x2052', '%rdi'] 
+
+movabs   I   r      
+
+the result weight is  0.25 
+
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
+
+['movabs', '$0x2014', '%rdi'] 
+
+movabs   I   r      
+
+the result weight is  0.25 
+
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
+
+['mov', '$0x0', '%al'] 
+
+mov   I   r      
+
+the result weight is  0.25 
+
+  name op1  op2  op3 weight
+0  mov   r    I  NaN   0.25
+1  mov   r    r  NaN   0.25
+2  mov   r    m  NaN    0.5
+3  mov   m  NaN  NaN      1
+
+
+['callq', '1030', '<printf@plt>'] 
+
+callq      m      
+
+the result weight is  2 
+
+      name  op1  op2  op3 weight
+186  callq  NaN  NaN  NaN      2
+187  callq    m  NaN  NaN      3
+
+
+['movabs', '$0x2058', '%rdi'] 
+
+movabs   I   r      
+
+the result weight is  0.25 
+
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
+
+['movabs', '$0x205e', '%rdi'] 
+
+movabs   I   r      
+
+the result weight is  0.25 
+
+     name op1  op2  op3 weight
+4  movabs   r    I  NaN   0.25
+5  movabs   r    r  NaN   0.25
+6  movabs   r    m  NaN    0.5
+7  movabs   m  NaN  NaN      1
+
+
+('hello', 6.5)
+('main', 5.5)
+('main1', 4.25)
+('main2', 2.75)
+('main3', 0.25)
+('hello', [72.8, 76.6734693877551, 76.6734693877551, 78.65, 92.3])
+('main2', [19.053571428571427, 42.705882352941174, 30.8, 32.43877551020408, 32.43877551020408, 33.275, 46.588235294117645, 99.0, 39.05])
+('main3', [1.7321428571428572, 3.8823529411764706, 2.8, 2.9489795918367347, 2.9489795918367347, 3.025, 3.025, 3.025, 4.235294117647059, 9.0, 9.0, 9.0, 3.55, 3.55, 3.55])
+('main', [38.107142857142854, 38.107142857142854, 85.41176470588235, 61.6, 64.87755102040816, 93.17647058823529])
+Total burnt energy is  1218.9999999999998 1219.0 
+
