@@ -39,7 +39,7 @@ chmod +x $1_unchanged
 #we run the unmodified executable
 
 
-opt -load build/skeleton/libSkeletonPass.* -skeleton < $1.bc > $1_inst.bc  2> code_ll_$1.txt
+opt -load build/skeleton/libSkeletonPass.* -skeleton < $1.bc > $1_inst.bc  2> code_ll_$1.txt  #enable-new-pm=0  might be nedded after $1_inst.bc
  echo "Applying of the llvm pass successfull"
 
 llc -filetype=obj  $1_inst.bc 
