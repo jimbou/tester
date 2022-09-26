@@ -1,21 +1,10 @@
-; ModuleID = 'foo.c'
-source_filename = "foo.c"
+; ModuleID = 'test.c'
+source_filename = "test.c"
 target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-unknown-linux-gnu"
 
-@.str = private unnamed_addr constant [13 x i8] c"hello world\0A\00", align 1
-@.str.1 = private unnamed_addr constant [15 x i8] c"hello world_2\0A\00", align 1
-@.str.2 = private unnamed_addr constant [18 x i8] c"Basic Block : %s\0A\00", align 1
-@.str.3 = private unnamed_addr constant [12 x i8] c"Energy: 15\0A\00", align 1
-
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @hello() #0 {
-entry:
-  %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i64 0, i64 0))
-  ret void
-}
-
-declare dso_local i32 @printf(i8* noundef, ...) #1
+@.str = private unnamed_addr constant [16 x i8] c"Hello, World! 2\00", align 1
+@.str.1 = private unnamed_addr constant [14 x i8] c"Hello, World!\00", align 1
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local i32 @main() #0 {
@@ -23,33 +12,24 @@ entry:
   %retval = alloca i32, align 4
   %a = alloca i32, align 4
   store i32 0, i32* %retval, align 4
-  store i32 9, i32* %a, align 4
+  store i32 3, i32* %a, align 4
   %0 = load i32, i32* %a, align 4
   %cmp = icmp sgt i32 %0, 2
   br i1 %cmp, label %if.then, label %if.else
 
 if.then:                                          ; preds = %entry
-  call void @hello()
+  %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([16 x i8], [16 x i8]* @.str, i64 0, i64 0))
   br label %if.end
 
 if.else:                                          ; preds = %entry
-  %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([15 x i8], [15 x i8]* @.str.1, i64 0, i64 0))
+  %call1 = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([14 x i8], [14 x i8]* @.str.1, i64 0, i64 0))
   br label %if.end
 
 if.end:                                           ; preds = %if.else, %if.then
   ret i32 0
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local void @print(i8* noundef %s) #0 {
-entry:
-  %s.addr = alloca i8*, align 8
-  store i8* %s, i8** %s.addr, align 8
-  %0 = load i8*, i8** %s.addr, align 8
-  %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([18 x i8], [18 x i8]* @.str.2, i64 0, i64 0), i8* noundef %0)
-  %call1 = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([12 x i8], [12 x i8]* @.str.3, i64 0, i64 0))
-  ret void
-}
+declare dso_local i32 @printf(i8* noundef, ...) #1
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
