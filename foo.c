@@ -64,9 +64,15 @@ int main() {
 }
 
 
-void print(char *s) {
+void print_1(char *s) {
     printf("Basic Block : %s\n", s);
     printf("Energy: 15\n");
+    return;
+
+}
+
+void print_2() {
+        printf("Energy2: 15\n");
     return;
 
 }
