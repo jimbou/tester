@@ -13,14 +13,14 @@ target triple = "x86_64-unknown-linux-gnu"
 @str.2 = private unnamed_addr constant [6 x i8] c"main1\00", align 1
 @str.3 = private unnamed_addr constant [6 x i8] c"main2\00", align 1
 @str.4 = private unnamed_addr constant [6 x i8] c"main3\00", align 1
-@str.5 = private unnamed_addr constant [8 x i8] c"print_2\00", align 1
-@str.6 = private unnamed_addr constant [8 x i8] c"final  \00", align 1
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local void @hello() #0 {
 hello:
   call void @print_1(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @str, i32 0, i32 0))
+  call void @print_2()
   %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i64 0, i64 0))
+  call void @print_2()
   ret void
 }
 
@@ -36,25 +36,23 @@ main:
   store i32 9, i32* %a, align 4
   %0 = load i32, i32* %a, align 4
   %cmp = icmp sgt i32 %0, 2
-  call void @print_2()
   br i1 %cmp, label %main1, label %main2
 
 main1:                                            ; preds = %main
-  call void @print_2()
   call void @print_1(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @str.2, i32 0, i32 0))
+  call void @print_2()
   call void @hello()
   call void @print_2()
   br label %main3
 
 main2:                                            ; preds = %main
-  call void @print_2()
   call void @print_1(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @str.3, i32 0, i32 0))
+  call void @print_2()
   %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([15 x i8], [15 x i8]* @.str.1, i64 0, i64 0))
   call void @print_2()
   br label %main3
 
 main3:                                            ; preds = %main2, %main1
-  call void @print_2()
   call void @print_1(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @str.4, i32 0, i32 0))
   ret i32 0
 }
@@ -72,10 +70,8 @@ entry:
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local void @print_2() #0 {
-print_2:
-  call void @print_1(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @str.5, i32 0, i32 0))
+entry:
   %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([13 x i8], [13 x i8]* @.str.4, i64 0, i64 0))
-  call void @print_1(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @str.6, i32 0, i32 0))
   ret void
 }
 

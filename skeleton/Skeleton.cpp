@@ -15,9 +15,9 @@ using namespace llvm;
 namespace{
 struct SkeletonPass : public ModulePass{
     static char ID;
-    //Function *raplread;   // this will be the identifier for the rapl read function
-    Function *monitor; 
-    Function *monitor_2; 
+    
+    Function *monitor;       // this will be the identifier for the function that does the rapl read for basic blocks
+    Function *monitor_2;     // this will be the identifier for the function that does the rapl read for the external functions
     SkeletonPass() : ModulePass(ID) {}
 
     virtual bool runOnModule(Module &M)
@@ -34,7 +34,7 @@ struct SkeletonPass : public ModulePass{
         for(Module::iterator L= M.begin(), K = M.end(); L!= K; ++L)
         {
 
-            if(L->getName() == "print_1"){
+            if(L->getName() == "print_1"){   //find the first rapl read function - the one for basic blocks
                 monitor = cast<Function>(L);
                 break;
                 
@@ -44,7 +44,7 @@ struct SkeletonPass : public ModulePass{
         for(Module::iterator L= M.begin(), K = M.end(); L!= K; ++L)
         {
 
-            if(L->getName() == "print_2"){
+            if(L->getName() == "print_2"){   // find the second rapl read function - the one for functions
                 monitor_2 = cast<Function>(L);
                 break;
                 
@@ -53,113 +53,77 @@ struct SkeletonPass : public ModulePass{
 
         for(Module::iterator F = M.begin(), E = M.end(); F!= E; ++F)
         {
-            if(F->getName() == "print_1"){
-                
+            if((F->getName() == "print_1") || (F->getName() == "print_2")) { // if this is one of the rapl read functions dont modify it
+                  
                 continue;
             }
            
+
             
-            bool last_inst =false;
-            bool prev_last = false ;
+            bool last_inst =false;    //this becomes true if the prev instruction than the one that is now examined was a call
+            bool prev_last = false ;   // this becomes true if the second to last instruction to the one we are currently examining was a call instruction
             for(Function::iterator BB = F->begin(), E = F->end(); BB != E; ++BB)
-            {
+            {           
 
                         int count =0 ;
                         int count_temp =0 ;
                         bool just_entered =false;
-                        count = std::distance(BB->begin(), BB->end());
-                        errs() << count << " \n";
+                        count = std::distance(BB->begin(), BB->end());  // find the size of the BB
+                        //errs() << count << " \n";
                         for (BasicBlock::iterator I = BB->begin(), IE = BB->end(); I != IE; ++I) {
                             count_temp++;
-                            if ((llvm::isa <llvm::CallInst> (I))){
-                                if (count_temp<count){ //intermidiate inst of bb
+                            if ((llvm::isa <llvm::CallInst> (I))){         //if we found a call instruction
+                                if (count_temp<count){                    //in this case we are in a intermidiate inst of bb
                                     errs() << "Case 1  \n";
                                     Instruction *inst1 = &*I;
                                     IRBuilder<> builder1(inst1);
-                                    //Value *v = builder1.CreateGlobalStringPtr(BB->getName(), "str");
-                                    //ArrayRef<Value *> args(v);
-                                    Instruction *newInst1 = CallInst::Create(monitor_2,  "");    // create the first insttruction to be added : a call to the print function
+                                    Instruction *newInst1 = CallInst::Create(monitor_2,  "");    // create the first call insttruction to be added : a call to the rapl function
                                     BB->getInstList().insert(I, newInst1);    
-                                    if (!just_entered ){
+                                    if (!just_entered ){                                        //just enters says that the last instruction was a call
                                         just_entered =true;}
                                     else{
-                                        just_entered =true;
+                                        just_entered =true;                                   //this is only the case if we have 2 call instructions back to back
                                         Instruction *inst2 = &*I;
                                         IRBuilder<> builder2(inst2);
-                                        Instruction *newInst2 = CallInst::Create(monitor_2,  "");    // create the first insttruction to be added : a call to the print function
+                                        Instruction *newInst2 = CallInst::Create(monitor_2,  "");    // create the second call insttruction to be added : a call to the rapl function
                                         BB->getInstList().insert(I, newInst2); 
                                     } 
 
                                 }
                                 else {
-                                    errs() << "Case 2  \n";
+                                    errs() << "Case 2  \n";  //in this case the last inst of BB is a calll
                                     Instruction *inst3 = &*I;
                                     IRBuilder<> builder3(inst3);
-                                    Instruction *newInst3 = CallInst::Create(monitor_2,  "");    // create the first insttruction to be added : a call to the print function
+                                    Instruction *newInst3 = CallInst::Create(monitor_2,  "");    // create the first insttruction to be added : a call to the rapl function
                                    
                                     BB->getInstList().insert(I, newInst3);  
-                                    last_inst =true;
-                                    //newInst3->insertAfter(inst3);
+                                    last_inst =true;  // the last instruction of BB was a call inst 
                                     
-                                    //BasicBlock *pb = &*BB;
-                                    //pb->getInstList().push_back(newInst3);
                                 }
                             }
-                            else {
-                                    if (count_temp==count) {last_inst=false;}// In this case the last inst is not a call inst
-                                    if (just_entered ){ // in this case the previous inst was a call so a new call to monitor has to be added
+                            else { // here it means the instruction is not a call inst but we need to know if the previous one was
+                                    if (count_temp==count) {
+                                        last_inst=false;}// In this case the last inst is not a call inst
+                                   
+                                    if (just_entered ){ // in this case the previous inst was a call  in the middle of BB so a new call to monitor has to be added
                                         just_entered =false;
-                                        Instruction *inst2 = &*I;
-                                        IRBuilder<> builder2(inst2);
-                                        Instruction *newInst2 = CallInst::Create(monitor_2,  "");    // create the first insttruction to be added : a call to the print function
-                                        BB->getInstList().insert(I, newInst2); 
+                                        Instruction *inst4 = &*I;
+                                        IRBuilder<> builder4(inst4);
+                                        Instruction *newInst4 = CallInst::Create(monitor_2,  "");    // create the second insttruction to be added : a call to the rapl function
+                                        BB->getInstList().insert(I, newInst4); 
                                     } 
                             }
                         }
-                            /*if( BF_ins_2!= IE){errs() << "LLLLLLLLLLLLLLLLLLLLLLLLLLLL\n";}
-                            if (llvm::isa <llvm::CallInst> (I)){
-                                
-                                Instruction *inst_2 = &*BF_ins;
-                                errs() << "new print_2 instr AAAAAAAAAAAA\n";
-                                IRBuilder<> builder_2(inst_2);
-                                Value *v2 = builder_2.CreateGlobalStringPtr(BB->getName(), "str");
-                                ArrayRef<Value *> args_2(v2);
-                                //Instruction *newInst_2 = CallInst::Create(monitor_2, args_2, "");    // create the first insttruction to be added : a call to the print function
-                                //BB->getInstList().insert(BF_ins, newInst_2);                         // we give as argument the name of the bb and we insert it at the beggining f the bb
+                            
 
-                                
-                                //Instruction *inst_3 = &*(BF_ins--);
-                                //errs() << "new print_2 instr AAAAAAAAAAAA\n";
-                                //IRBuilder<> builder_3(inst_3);
-                                //Value *v3 = builder_3.CreateGlobalStringPtr(BB->getName(), "str");
-                                //ArrayRef<Value *> args_3(v3);
-                                //Instruction *newInst_3 = CallInst::Create(monitor_2, args_3, "");    // create the first insttruction to be added : a call to the print function
-                                
-
-                               
-                                errs() << "nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
-                                Instruction *inst_3 = &*(I);
-                                errs() << "new print_2 instr AAAAAAAAAAAA\n";
-                                IRBuilder<> builder_3(inst_3);
-                                Value *v3 = builder_3.CreateGlobalStringPtr(BB->getName(), "str");
-                                ArrayRef<Value *> args_3(v3);
-                                Instruction *newInst_3 = CallInst::Create(monitor_2, args_3, ""); 
-                                
-                                //else {
-                                        
-                                 //   BF_ins++;
-                                 //   BB->getInstList().insert(BF_ins, newInst_2);  
-
-                                //}
-*/                  
                     BasicBlock::iterator BI = BB->begin();     // BI will hold the begging point  of the basic block so that we can insert instructions there
                     BasicBlock::iterator BF = BB->end();
                     
                     
-                     if(prev_last)  {    //Checkif last inst is call so we have to add call now 
+                     if(prev_last)  {    //Checkif last inst of previous BB was a call so we have to add call  to rapl now 
                         Instruction *inst5 = &*BI;
                         IRBuilder<> builder5(inst5);
-                        Instruction *newInst5 = CallInst::Create(monitor_2,  "");    // create the first insttruction to be added : a call to the print function
+                        Instruction *newInst5 = CallInst::Create(monitor_2,  "");    // create the first insttruction to be added : a call to the rapl  function
                         BB->getInstList().insert(BI, newInst5); 
 
                     }     
@@ -182,13 +146,7 @@ struct SkeletonPass : public ModulePass{
                     ArrayRef<Value *> args(v);
                     Instruction *newInst = CallInst::Create(monitor, args, "");    // create the first insttruction to be added : a call to the print function
                     BB->getInstList().insert(BI, newInst);                         // we give as argument the name of the bb and we insert it at the beggining f the bb
-                    /*
-                    Instruction *newInst0 = CallInst::Create(raplread, "");      //create the second instruction to be added : a call to the readrapl function which reads rapl energy
-                    BB->getInstList().insert(BI, newInst0);                       // we insert it at the beggining of the basic block and it will print two energy values
-                    
-                    Instruction *newInst1 = CallInst::Create(raplread, "");     //create the third instruction to be added : a call to the readrapl function which reads rapl energy
-                    BB->getInstList().push_back(newInst1);                     // we insert it at the end of the basic block and it will print two energy values
-                      */  
+                  
 
                           
 
@@ -196,38 +154,16 @@ struct SkeletonPass : public ModulePass{
             }
         }
 
-        Instruction *inst0 = &*B_last;
+                   /*                                            
+                    Instruction *inst0 = &*B_last;                  // add another basic block read with final as input name at the end of the code
                     IRBuilder<> builder(inst0);
                     Value *v1 = builder.CreateGlobalStringPtr("final  ", "str");
                     ArrayRef<Value *> args(v1);
                     Instruction *newInst0 = CallInst::Create(monitor, args, "");    // create the first insttruction to be added : a call to the print function
                     F_last->getInstList().insert(B_last, newInst0);  
                     
-
-       /*Module::iterator M_last = M.end();           //we find the last function of the module
-        M_last-- ;
-        errs() << "0\n";
-        Function::iterator F_last = M_last->end();   // we find the last BB of the last function of the module
-        F_last--;
-        errs() << F_last->getName();
-        BasicBlock::iterator BB_last= F_last->end();  // we find the last instruction of the last BB of the last function  of the module
-        BB_last--;
-        errs() << "02\n";
-        Instruction *inst0 = &*BB_last;
-        errs() << "1\n";
-        IRBuilder<> builder1(inst0);
-        errs() << "2\n";
-        Value *v1 = builder1.CreateGlobalStringPtr(F_last->getName(), "str");
-        errs() << "3\n";
-        ArrayRef<Value *> args(v1);
-        errs() << "4\n";
-        Instruction *newInst0 = CallInst::Create(monitor, args, "");    // create the first insttruction to be added : a call to the print function
-        errs() << "5\n";
-        F_last->getInstList().push_back(newInst0);                         // we give as argument the name of the bb and we insert it at the beggining f the bb
-              errs() << "6\n";
-
-        
-*/
+                    */
+       
 
 
         return true;
