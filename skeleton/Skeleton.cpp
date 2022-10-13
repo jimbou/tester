@@ -17,7 +17,9 @@ struct SkeletonPass : public ModulePass{
     static char ID;
     
     Function *monitor;       // this will be the identifier for the function that does the rapl read for basic blocks
-    Function *monitor_2;     // this will be the identifier for the function that does the rapl read for the external functions
+    Function *monitor_2;     // this will be the identifier for the function that does the rapl read at the start the external functions
+    Function *monitor_3;     // this will be the identifier for the function that does the rapl read at the end the external functions
+
     SkeletonPass() : ModulePass(ID) {}
 
     virtual bool runOnModule(Module &M)
@@ -36,24 +38,25 @@ struct SkeletonPass : public ModulePass{
 
             if(L->getName() == "print_1"){   //find the first rapl read function - the one for basic blocks
                 monitor = cast<Function>(L);
-                break;
                 
             }
-        }
-
-        for(Module::iterator L= M.begin(), K = M.end(); L!= K; ++L)
-        {
-
-            if(L->getName() == "print_2"){   // find the second rapl read function - the one for functions
+            
+            else if(L->getName() == "print_2"){   // find the second rapl read function - the one for start of functions
                 monitor_2 = cast<Function>(L);
-                break;
+                
+            }
+            
+            else if(L->getName() == "print_3"){   // find the third rapl read function - the one for end of functions
+                monitor_3 = cast<Function>(L);
                 
             }
         }
+
+        
 
         for(Module::iterator F = M.begin(), E = M.end(); F!= E; ++F)
         {
-            if((F->getName() == "print_1") || (F->getName() == "print_2")) { // if this is one of the rapl read functions dont modify it
+            if((F->getName() == "print_1") || (F->getName() == "print_2") || (F->getName() == "print_3")) { // if this is one of the rapl read functions dont modify it
                   
                 continue;
             }
@@ -74,20 +77,23 @@ struct SkeletonPass : public ModulePass{
                             count_temp++;
                             if ((llvm::isa <llvm::CallInst> (I))){         //if we found a call instruction
                                 if (count_temp<count){                    //in this case we are in a intermidiate inst of bb
-                                    errs() << "Case 1  \n";
-                                    Instruction *inst1 = &*I;
-                                    IRBuilder<> builder1(inst1);
-                                    Instruction *newInst1 = CallInst::Create(monitor_2,  "");    // create the first call insttruction to be added : a call to the rapl function
-                                    BB->getInstList().insert(I, newInst1);    
+                                    
                                     if (!just_entered ){                                        //just enters says that the last instruction was a call
                                         just_entered =true;}
                                     else{
                                         just_entered =true;                                   //this is only the case if we have 2 call instructions back to back
                                         Instruction *inst2 = &*I;
                                         IRBuilder<> builder2(inst2);
-                                        Instruction *newInst2 = CallInst::Create(monitor_2,  "");    // create the second call insttruction to be added : a call to the rapl function
+                                        Instruction *newInst2 = CallInst::Create(monitor_3,  "");    // create the second call insttruction to be added : a call to the rapl function
                                         BB->getInstList().insert(I, newInst2); 
                                     } 
+                                    
+                                    errs() << "Case 1  \n";
+                                    Instruction *inst1 = &*I;
+                                    IRBuilder<> builder1(inst1);
+                                    Instruction *newInst1 = CallInst::Create(monitor_2,  "");    // create the first call insttruction to be added : a call to the rapl function
+                                    BB->getInstList().insert(I, newInst1);    
+                                    
 
                                 }
                                 else {
@@ -109,7 +115,7 @@ struct SkeletonPass : public ModulePass{
                                         just_entered =false;
                                         Instruction *inst4 = &*I;
                                         IRBuilder<> builder4(inst4);
-                                        Instruction *newInst4 = CallInst::Create(monitor_2,  "");    // create the second insttruction to be added : a call to the rapl function
+                                        Instruction *newInst4 = CallInst::Create(monitor_3,  "");    // create the second insttruction to be added : a call to the rapl function
                                         BB->getInstList().insert(I, newInst4); 
                                     } 
                             }
@@ -123,7 +129,7 @@ struct SkeletonPass : public ModulePass{
                      if(prev_last)  {    //Checkif last inst of previous BB was a call so we have to add call  to rapl now 
                         Instruction *inst5 = &*BI;
                         IRBuilder<> builder5(inst5);
-                        Instruction *newInst5 = CallInst::Create(monitor_2,  "");    // create the first insttruction to be added : a call to the rapl  function
+                        Instruction *newInst5 = CallInst::Create(monitor_3,  "");    // create the first insttruction to be added : a call to the rapl  function
                         BB->getInstList().insert(BI, newInst5); 
 
                     }     

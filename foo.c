@@ -58,6 +58,7 @@ int main() {
     hello();   
     }
     else{
+      hello();
       printf("hello world_2\n");   
     }
     return 0;
@@ -72,6 +73,12 @@ void print_1(char *s) {
 }
 
 void print_2() {
+        printf("Energy2: 15\n");
+    return;
+
+}
+
+void print_3() {
         printf("Energy2: 15\n");
     return;
 

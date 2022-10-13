@@ -34,6 +34,7 @@ if.then:                                          ; preds = %entry
   br label %if.end
 
 if.else:                                          ; preds = %entry
+  call void @hello()
   %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([15 x i8], [15 x i8]* @.str.1, i64 0, i64 0))
   br label %if.end
 
@@ -54,6 +55,13 @@ entry:
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local void @print_2() #0 {
+entry:
+  %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([13 x i8], [13 x i8]* @.str.4, i64 0, i64 0))
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local void @print_3() #0 {
 entry:
   %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([13 x i8], [13 x i8]* @.str.4, i64 0, i64 0))
   ret void

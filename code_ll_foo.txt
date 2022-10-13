@@ -6,7 +6,7 @@ Of function : hello
 hello:
   call void @print_2()
   %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i64 0, i64 0))
-  call void @print_2()
+  call void @print_3()
   ret void
 new basic block
 Basic Block name: main
@@ -28,8 +28,9 @@ Of function : main
 main1:                                            ; preds = %main
   call void @print_2()
   call void @hello()
-  call void @print_2()
+  call void @print_3()
   br label %if.end
+Case 1  
 Case 1  
 new basic block
 Basic Block name: main2
@@ -37,8 +38,11 @@ Of function : main
 
 main2:                                            ; preds = %main
   call void @print_2()
-  %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([15 x i8], [15 x i8]* @.str.1, i64 0, i64 0))
+  call void @hello()
+  call void @print_3()
   call void @print_2()
+  %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([15 x i8], [15 x i8]* @.str.1, i64 0, i64 0))
+  call void @print_3()
   br label %if.end
 new basic block
 Basic Block name: main3
