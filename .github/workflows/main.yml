@@ -18,4 +18,4 @@ jobs:
           branch: develop2
           title: Automatically created pull request
           body: Changes from the develop branch
-          reviewers: jimbou
+
