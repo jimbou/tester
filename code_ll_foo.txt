@@ -8,7 +8,7 @@ hello:
   %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i64 0, i64 0))
   call void @print_3()
   ret void
-new basic block
+new basic blockx
 Basic Block name: main
 Of function : main
 
