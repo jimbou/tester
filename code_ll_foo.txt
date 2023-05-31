@@ -1,6 +1,6 @@
 Case 1  
 new basic block
-Basic Block name: hello
+Basic Block name: hellfo
 Of function : hello
 
 hello:
