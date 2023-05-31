@@ -1,7 +1,6 @@
 
 on:
-  push:
-    branches: [develop]
+  push
 
 name: create-pull-request workflow
 jobs:
