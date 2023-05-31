@@ -8,6 +8,9 @@ jobs:
     name: Open PR to main
     runs-on: ubuntu-latest
     steps:
+    - name: Get Commit ID
+      id: commit_id
+      run: echo "::set-output name=commit_id::${GITHUB_SHA}"
     - uses: actions/checkout@v3
       name: checkout
 
@@ -15,7 +18,7 @@ jobs:
       name: pull-request
       with:
         destination_branch: "develop2"
-        pr_title: "Pulling ${{ github.ref }} into develop2 (${GITHUB_SHA:0:7})"
+        pr_title: "Pulling ${{ github.ref }} into develop2 (${{ steps.commit_id.outputs.commit_id }})"
         pr_body: "*An automated PR*"
         pr_reviewer: "jimbou"
         pr_draft: true
