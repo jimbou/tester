@@ -1,7 +1,7 @@
 name: Staging Auto-PR
 on:
   push:
-    branches: [master]
+    branches: ["develop"]
 
 jobs:
   pull-request:
@@ -18,7 +18,7 @@ jobs:
       name: pull-request
       with:
         destination_branch: "develop2"
-        pr_title: "Pulling ${{ github.ref }} into develop2 (${{ steps.commit_id.outputs.commit_id }})"
+        pr_title: "Pulling ${{ github.ref }} into develop2 "
         pr_body: "*An automated PR*"
         pr_reviewer: "jimbou"
         pr_draft: true
