@@ -15,7 +15,7 @@ mov    $0x0,%al
 callq  1030 <printf@plt>
 pop    %rbp
 retq
-nop
+noop
 nop
 nop
 nop
