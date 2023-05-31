@@ -1,6 +1,6 @@
 name: Staging Auto-PR
 on:
-  create:
+  push:
     branches: ['develop']
 
 jobs:
