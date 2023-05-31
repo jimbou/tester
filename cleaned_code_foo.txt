@@ -1,7 +1,7 @@
 New fake function : _init
 endbr64
 sub    $0x8,%rsp
-mov    0x2fd9(%rip),%rax        # 3fe8 <__gmon_start__>
+mov    0x2fd9(%rip),%rcax        # 3fe8 <__gmon_start__>
 test   %rax,%rax
 je     1016 <_init+0x16>
 callq  *%rax
