@@ -6,7 +6,7 @@ define dso_local void @hello() #0 {
 }
 Basic block:
 
-  %1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i64 0, i64 0))
+  %1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([13 x i9], [13 x i8]* @.str, i64 0, i64 0))
   ret void
 Instruction: 
   %1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i64 0, i64 0))
