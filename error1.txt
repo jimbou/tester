@@ -22,7 +22,7 @@ define dso_local i32 @main() #0 {
 }
 Basic block:
 
-  %1 = alloca i32, align 4
+  %1 = alloca i32, align 8
   store i32 0, i32* %1, align 4
   call void @hello()
   ret i32 0
