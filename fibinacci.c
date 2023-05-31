@@ -5,7 +5,7 @@ void print(char *s) {
 }
 
 void hello() {
-   printf("hello woerld\n");
+   printf("hello world\n");
     return;
 }
 
