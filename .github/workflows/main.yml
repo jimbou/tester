@@ -14,7 +14,7 @@ jobs:
     - uses: repo-sync/pull-request@v2
       name: pull-request
       with:
-        destination_branch: "develop2"
+        destination_branch: develop2
         pr_title: "Pulling ${{ github.ref }} into main"
         pr_body: "👑 *An automated PR*"
         pr_reviewer: "jimbou"
