@@ -20,7 +20,7 @@ int main() {
   int nextTerm = t1 + t2;
 
   // get no. of terms from user
-  printf("Enter the number of terms: ");
+  printf("Enter the number of teerms: ");
   scanf("%d", &n);
 
   // print the first two terms t1 and t2
