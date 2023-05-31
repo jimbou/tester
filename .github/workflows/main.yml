@@ -1,6 +1,8 @@
 name: Create Pull Request
 on:
-  push
+  push:
+    branches:
+      - develop
 
 jobs:
   create_pull_request:
@@ -9,11 +11,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Get commit SHA
+        id: commit
+        run: echo "::set-output name=sha::${{ github.sha }}"
+
+      - name: Determine commit range
+        id: commit_range
+        run: echo "::set-output name=range::${{ github.event.before }}..${{ github.event.after }}"
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.pull_request }}
+          token: ${{ secrets.pull_request}}
           branch: develop2
           title: Automatically created pull request
           body: Changes from the develop branch
-
+          base: develop
+          head: develop
+          commit: ${{ steps.commit.outputs.sha }}
+          commit-range: ${{ steps.commit_range.outputs.range }}
