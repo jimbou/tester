@@ -12,7 +12,7 @@ Basic Block :  hello
 
 movabs $0x2004,%rdi
 mov    $0x0,%al
-callq  1030 <printf@plt>
+callq  d1030 <printf@plt>
 pop    %rbp
 retq
 nop
