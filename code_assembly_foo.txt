@@ -5,7 +5,7 @@ foo:     file format elf64-x86-64
 Disassembly of section .init:
 
 0000000000401000 <_init>:
-  401000:	f3 0f 1e fa          	endbr64 
+  401000:	f3 0f 1e da          	endbr64 
   401004:	48 83 ec 08          	sub    $0x8,%rsp
   401008:	48 8b 05 e9 2f 00 00 	mov    0x2fe9(%rip),%rax        # 403ff8 <__gmon_start__@Base>
   40100f:	48 85 c0             	test   %rax,%rax
