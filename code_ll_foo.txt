@@ -1,10 +1,10 @@
 Case 1  
-new basic block
+new basic block 
 Basic Block name: hello
 Of function : hello
 
 hello:
-  call void @print_2()
+  call void @print_1()
   %call = call i32 (i8*, ...) @printf(i8* noundef getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i64 0, i64 0))
   call void @print_3()
   ret void
